@@ -1,0 +1,580 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f5f7;
+  color: #333;
+}
+ 
+.container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+ 
+/* Sidebar Styles */
+.sidebar {
+  width: 240px;
+  background-color: #ffffff;
+  color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* จัดกลางแนวนอน */
+  justify-content: center; /* จัดกลางแนวตั้ง */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 900; /* Make sure sidebar is below header */
+}
+
+.sidebar-menu {
+  padding: 0; /* ลบ Padding เดิม */
+  text-align: center; /* จัดข้อความในเมนูให้ตรงกลาง */
+}
+
+.sidebar-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 5;
+}
+ 
+.sidebar-menu li {
+  position: relative;
+  margin: 10px 0;
+}
+ 
+/* Sidebar Menu Item Styles */
+.sidebar-menu li a {
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden; /* ซ่อนส่วนเกินเมื่อมี Effect */
+}
+
+.sidebar-menu li a:hover {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* เพิ่ม Gradient เมื่อ Hover */
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4); /* เพิ่ม Shadow ให้เด่น */
+  transform: translateY(-2px); /* ขยับขึ้นเล็กน้อยเมื่อ Hover */
+  border-radius: 20px; /* เพิ่มความโค้งมนของกรอบ */
+  padding: 14px 24px; /* ปรับ Padding ให้สมดุล */
+}
+
+.sidebar-menu li a.active {
+  background: linear-gradient(135deg, #0056b3, #004080); /* Gradient สำหรับ Active */
+  color: #ffffff;
+  border-radius: 20px; /* ความโค้งมนของกรอบ */
+  box-shadow: 0 8px 16px rgba(0, 64, 128, 0.5); /* Shadow ให้เด่น */
+  position: relative;
+  padding: 14px 24px; /* ปรับ Padding */
+}
+
+.sidebar-menu li a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%; /* ปรับให้เส้นกลางพอดี */
+  transform: translateY(-50%);
+  height: 80%; /* ความสูงของเส้น */
+  width: 6px; /* ความหนาของเส้น */
+  background: #ffffff; /* สีขอบ */
+  border-radius: 3px; /* โค้งมนของขอบ */
+}
+
+.sidebar-menu li a i {
+  margin-right: 15px; /* เพิ่มช่องว่างระหว่างไอคอนและข้อความ */
+  font-size: 18px;
+  color: inherit;
+  transition: color 0.3s, transform 0.3s ease;
+}
+
+
+.sidebar-menu li a:hover::before {
+  width: 8px; /* ขยายขอบด้านซ้ายเมื่อ Hover */
+}
+
+.sidebar-menu li a i {
+  margin-right: 10px;
+  font-size: 18px;
+  color: inherit;
+  transition: color 0.3s, transform 0.3s ease;
+}
+
+.sidebar-menu li a:hover i {
+  color: #ffffff;
+  transform: rotate(15deg); /* หมุน Icon เมื่อ Hover */
+}
+
+.sidebar-menu li:hover {
+  transform: scale(1.05); /* ขยายขนาดเล็กน้อยเมื่อ Hover */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* เพิ่ม Effect Ripple เมื่อคลิก */
+.sidebar-menu li a:active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+ 
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;  /* ลด padding ลง */
+  background-color: #ffffff;
+  box-shadow: none;
+  position: fixed;
+  top: 0;
+  left: 240px;  /* ให้ header ติดกับ sidebar */
+  right: 0;
+  z-index: 1000; /* ให้ header อยู่บน sidebar */
+  width: calc(100% - 240px);  /* ทำให้ width ของ header เท่ากับ width ของ content */
+  border-bottom: 1px solid #ddd;
+  height: 60px;  /* ลดความสูงของ header */
+}
+ 
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 250px;
+  padding: 8px 15px 8px 35px; /* เพิ่ม padding ด้านซ้ายเพื่อเว้นที่ให้ไอคอน */
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+}
+
+.search-container i {
+  position: absolute;
+  left: 10px;  /* ตั้งตำแหน่งไอคอนทางซ้ายสุด */
+  font-size: 20px;
+  color: #888;
+}
+
+
+.search-input:focus + .search-container i {
+  color: #007bff; /* เปลี่ยนสีของไอคอนเมื่อโฟกัสที่ input */
+}
+
+ 
+.user-info {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #333;
+  margin-right: 50px;
+}
+
+.user-avatar {
+  width: 36px;  /* ลดขนาดรูป */
+  height: 36px; 
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.user-info span {
+  font-size: 16px;
+}
+
+.user-info i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.user-info:hover i {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: linear-gradient(135deg, #f0f4f8, #e6ebf1);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  min-width: 180px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 10px 20px;
+}
+
+.dropdown-menu ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu ul li a i {
+  margin-right: 10px;
+  color: #555;
+}
+
+.dropdown-menu ul li:hover {
+  background-color: #e6ebf1;
+  cursor: pointer;
+}
+
+.dropdown-menu ul li:hover a {
+  color: #007bff;
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Main Content Styles */
+.content {
+  margin-left: 240px; /* ให้เนื้อหาหลักไม่ทับ sidebar */
+  padding: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+  background-color: #ecf0f1;
+  margin-top: 60px; /* เลื่อนเนื้อหาหลักลงจาก header */
+}
+ 
+/* Main Content Styles */
+.content {
+    margin-left: 240px; /* ให้เนื้อหาหลักไม่ทับ sidebar */
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+    background-color: #ecf0f1;
+    margin-top: 60px; /* เลื่อนเนื้อหาหลักลงจาก header */
+    display: flex;
+    flex-direction: column; /* ทำให้เนื้อหาใน .content อยู่ในแนวตั้ง */
+  }
+ 
+/* Canvas Wrapper */
+.canvas-wrapper {
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* ใช้ Flexbox เพื่อจัดเรียง */
+    gap: 10px; /* ช่องว่างระหว่าง sections */
+  }
+  
+  /* Canvas Sections */
+  .canvas-section {
+    flex: 1; /* ทำให้แต่ละ section มีขนาดเท่ากัน */
+    display: flex;
+    align-items: center; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+    border: 1px solid #eee; /* เส้นขอบแยกแต่ละ section */
+    border-radius: 8px; /* มุมโค้งเล็กน้อย */
+    padding: 20px;
+    background-color: #f9f9f9; /* สีพื้นหลังของแต่ละ section */
+    transition: transform 0.3s ease;
+  }
+  
+  .canvas-section:hover {
+    transform: translateY(-5px); /* เพิ่มเอฟเฟกต์ hover */
+    background-color: #f4f4f4; /* สีเปลี่ยนเล็กน้อยเมื่อ hover */
+  }
+  
+  /* Action Button */
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-button img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.action-button button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3498db;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.action-button button:hover {
+  color: #ffffff;
+  background-color: #3498db;
+}
+  
+  
+  /* Pagination Styles */
+  .pagination {
+    display: flex; /* ใช้ Flexbox */
+    justify-content: center; /* จัดให้อยู่ตรงกลาง */
+    margin-top: 20px;
+    margin-top: 0; /* ลดระยะห่างจากด้านล่าง */
+    width: 100%;
+    margin-top: 30%; /* ทำให้ปุ่ม Pagination ไปอยู่ด้านล่างสุด */
+    position: sticky;
+  }
+ 
+  .page-btn {
+    background-color: #ffffff;
+    color: rgb(13, 13, 13);
+    border: 2px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 0 5px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+  }
+ 
+  .page-btn:hover {
+    background-color: #2980b9;
+  }
+ 
+  .page-btn:focus {
+    outline: none;
+  }
+
+ /* ปรับขนาดของรูปภาพใน action-button */
+.img-item {
+    width: 190px; /* กำหนดความกว้างเป็น 190px */
+    height: 190px; /* กำหนดความสูงเป็น 190px ให้เท่ากับความกว้าง เพื่อให้สมส่วน */
+    margin-bottom: 10px; /* เพิ่มช่องว่างด้านล่างระหว่างรูปกับปุ่ม */
+    object-fit: contain; /* ทำให้รูปไม่ถูกตัดและสมส่วน */
+    transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์เมื่อ hover */
+  }
+  
+  .img-item:hover {
+    transform: scale(1.1);
+  }
+
+  .img-itemgroup {
+    margin-bottom: 10px; /* เพิ่มช่องว่างด้านล่างระหว่างรูปกับปุ่ม */
+    object-fit: contain; /* ทำให้รูปไม่ถูกตัดและสมส่วน */
+    transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์เมื่อ hover */
+  }
+  
+  .img-itemgroup:hover {
+    transform: scale(1.1);
+  }
+  
+  .img-itemcomposite {
+    width: 100px;
+    margin-bottom: 10px; /* เพิ่มช่องว่างด้านล่างระหว่างรูปกับปุ่ม */
+    object-fit: contain; /* ทำให้รูปไม่ถูกตัดและสมส่วน */
+    transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์เมื่อ hover */
+  }
+  
+  .img-itemcomposite:hover {
+    transform: scale(1.1);
+  }
+
+/* Table Styles */
+.listings-table {
+  width: 99%;  /* The table now takes up the remaining space */
+  border-collapse: collapse;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.listings-table th, .listings-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;  /* จัดกลางข้อความในแนวนอน */
+  vertical-align: middle; /* จัดกลางข้อความในแนวตั้ง */
+}
+
+.listings-table th {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.listings-table td {
+  background-color: #ffffff;
+}
+
+.listings-table td img {
+  max-width: 50px;
+}
+
+  /* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0; /* ตั้งค่าเริ่มต้นให้โปร่งใส */
+  transition: opacity 0.3s ease; /* เพิ่ม Transition */
+}
+ 
+/* Popup Content */
+.popup-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transform: scale(0.8); /* เริ่มต้นด้วยการย่อขนาด */
+  transition: transform 0.3s ease; /* เพิ่ม Transition */
+}
+ 
+/* เมื่อ Popup เปิด */
+.popup-overlay.show {
+  display: flex;
+  opacity: 1; /* ทำให้มองเห็น */
+}
+ 
+.popup-content.show {
+  transform: scale(1); /* ขยายขนาดกลับมา */
+}
+ 
+.popup-content h2 {
+  margin: 0 0 15px;
+  font-size: 22px;
+  color: #333;
+}
+ 
+.popup-content p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+ 
+.popup-content label {
+  display: block;
+  font-size: 14px;
+  margin: 10px 0 5px;
+  color: #333;
+  text-align: left;
+}
+ 
+.popup-content input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+ 
+/* Popup Buttons */
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+ 
+.popup-buttons .btn-cancel,
+.popup-buttons .btn-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+ 
+.popup-buttons .btn-cancel {
+  background: #e74c3c;
+  color: white;
+}
+ 
+.popup-buttons .btn-cancel:hover {
+  background: #c0392b;
+}
+ 
+.popup-buttons .btn-submit {
+  background: #007bff;
+  color: white;
+}
+ 
+.popup-buttons .btn-submit:hover {
+  background: #0056b3;
+}
+
+.popup-content input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* เพิ่มสไตล์สำหรับ Active Listings */
+.popup-content input[type="url"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}

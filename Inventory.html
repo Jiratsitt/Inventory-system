@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="Inventory.css">
+  <!-- ลิงก์ Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-menu">
+        <ul>
+          <li><a href="Listings.html"><i class="fas fa-list"></i> Listings</a></li>
+          <li><a href="Inventory.html" class="active"><i class="fas fa-box"></i> Inventory</a></li>
+          <li><a href="Order.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+          <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+          <li><a href="Shipment.html"><i class="fas fa-shipping-fast"></i> Shipments</a></li>
+          <li><a href="Report.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+        </ul>
+      </div>
+    </div>
+ 
+    <!-- Main Content -->
+    <div class="content">
+      <div class="header">
+        <div class="search-container">
+          <i class="ri-search-line"></i>
+          <input type="text" class="search-input" placeholder="Search...">
+        </div>
+        <div class="user-info" onclick="toggleDropdown()">
+          <img src="img/Meow.png" alt="User Avatar" class="user-avatar">
+          <span>Meow Meowngaw</span>
+          <i class="fas fa-caret-down"></i>
+          <div id="user-dropdown" class="dropdown-menu">
+            <ul>
+              <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+              <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+              <li><a onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="listings-header">
+        <h2>Inventory</h2>
+        <div class="canvas-wrapper">
+            <div class="canvas-section">
+              <div class="action-button">
+                <img src="img/newitem.png" alt="New Item" class="img-item">
+                <button onclick="openPopup()">New Item</button>
+              </div>
+            </div>
+            <div class="canvas-section">
+              <div class="action-button">
+                <img src="img/itemgroup.png" alt="New Item Group" class="img-itemgroup">
+                <button onclick="openPopup()">New Item Group</button>
+              </div>
+            </div>
+            <div class="canvas-section">
+              <div class="action-button">
+                <img src="img/itemcomposite.png" alt="New Composite Item" class="img-itemcomposite">
+                <button onclick="openPopup()">New Composite Item</button>
+              </div>
+            </div>
+          </div>
+          <table class="listings-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Total QTY</th>
+                <th>Buy Price</th>
+                <th>Sell Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="shipment-table-body">
+              <!-- ข้อมูลจะถูกเพิ่มที่นี่ -->
+            </tbody>
+          </table>
+          <div class="pagination">
+            <button class="page-btn">«</button>
+            <button class="page-btn">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">»</button>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Popup -->
+      <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+          <h2>New Shipment</h2>
+          <p>Fill in the details for your new draft below:</p>
+          <form>
+            <label for="product-id">ID</label>
+            <input type="text" id="product-id" placeholder="Enter product Id">
+    
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-status" placeholder="Enter product name">
+      
+            <label for="product-qty">Total QTY</label>
+            <input type="number" id="product-qty" placeholder="Enter qty">
+    
+            <label for="product-name">Buy Price</label>
+            <input type="text" id="product-name" placeholder="Enter buy price">
+      
+            <label for="product-qty">Sell Price</label>
+            <input type="text" id="product-shipment" placeholder="Enter sell price">
+    
+            <div class="popup-buttons">
+              <button type="button" class="btn-cancel" onclick="closePopup()">Cancel</button>
+              <button type="button" class="btn-submit" onclick="saveShipment()">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+  
+  
+  <script src="Inventory.js"></script>
+</body>
+</html>
