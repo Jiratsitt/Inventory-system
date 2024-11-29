@@ -11,3 +11,7 @@ Orders
 Shipment
 #พศวัต พูนทรัพย์กิจ 1650707191
 Report
+
+ในใส่ของการloginมีการฟิคemailและpasswordเพราะใช้APIในการเชื่อม
+eve.holt@reqres.in
+cityslicka
