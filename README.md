@@ -13,5 +13,5 @@ Shipment
 Report
 
 ในใส่ของการloginมีการฟิคemailและpasswordเพราะใช้APIในการเชื่อม
-eve.holt@reqres.in
-cityslicka
+email: eve.holt@reqres.in
+pass: cityslicka
